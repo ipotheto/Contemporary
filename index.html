@@ -1,74 +1,14 @@
-<script>
-  const img = document.querySelector("img");
-
-  let corruption = 0;
-
-  // 👁️ subtle movement (alive feeling)
-  setInterval(() => {
-    img.style.transform =
-      `translate(${Math.random()*2-1}px, ${Math.random()*2-1}px)`;
-  }, 400);
-
-  // 🧠 memory
-  let visits = localStorage.getItem("visits") || 0;
-  visits++;
-  localStorage.setItem("visits", visits);
-
-  if (visits > 2) {
-    document.title = "you came back";
-  }
-
-  // 💀 corruption loop
-  setInterval(() => {
-    corruption += 0.02;
-
-    // progressively worse effects
-    const blur = corruption * 2;
-    const contrast = 1 + corruption * 0.5;
-    const brightness = 1 - corruption * 0.3;
-    const hue = corruption * 50;
-
-    img.style.filter = `
-      blur(${blur}px)
-      contrast(${contrast})
-      brightness(${brightness})
-      hue-rotate(${hue}deg)
-      grayscale(${corruption * 0.8})
-    `;
-
-    // slight scaling distortion
-    img.style.transform += ` scale(${1 + corruption * 0.05})`;
-
-  }, 500);
-
-  // 🫥 glitch flashes get worse over time
-  setInterval(() => {
-    const msg = document.createElement("div");
-    msg.innerText = Math.random() > 0.5 ? "stay" : "leave";
-    msg.style.position = "absolute";
-    msg.style.color = "#111";
-    msg.style.fontSize = "14px";
-    msg.style.top = Math.random() * 100 + "%";
-    msg.style.left = Math.random() * 100 + "%";
-
-    document.body.appendChild(msg);
-
-    setTimeout(() => msg.remove(), 60 + Math.random()*100);
-  }, 4000);
-
-  // 🕳️ after a while, things get BAD
-  setTimeout(() => {
-    setInterval(() => {
-      img.style.transform += `
-        rotate(${Math.random()*2-1}deg)
-        skew(${Math.random()*2-1}deg)
-      `;
-    }, 300);
-  }, 15000);
-
-  // 🫨 cursor disappears
-  setTimeout(() => {
-    document.body.style.cursor = "none";
-  }, 8000);
-
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Contemporary</title>
+  <style>
+    body, html { margin:0; padding:0; height:100%; background:#000; overflow:hidden; }
+    img { width:100vw; height:100vh; object-fit:contain; display:block; }
+  </style>
+</head>
+<body>
+  <img src="20260320_180801.jpg" alt="The only picture">
+</body>
+</html>
